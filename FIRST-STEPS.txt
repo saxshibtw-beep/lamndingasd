@@ -23,3 +23,20 @@ FIRST STEPS (Luxy Spa site + APK bot)
 7) First real APK: send your .apk file to the bot as a document in Telegram.
 
 Use config.example.json only if you need a fresh template to copy from.
+
+GitHub (upload this project)
+-----------------------------
+1) On github.com: New repository → name it (e.g. lamndingasd) → leave “Add README” unchecked → Create.
+2) In this folder (PowerShell), set your name once (use your real email if you use GitHub):
+   git config --global user.name "Your Name"
+   git config --global user.email "your@email.com"
+3) Connect and push (replace YOUR_USER and YOUR_REPO):
+   git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+   git push -u origin main
+   If GitHub asks for a password, use a Personal Access Token (Settings → Developer settings → Tokens), not your account password.
+
+Secrets: config.json and notify-config.js are in .gitignore so they are NOT pushed.
+After cloning elsewhere, copy config.example.json → config.json and fill it again;
+copy notify-config.example.js → notify-config.js if you use download pings.
+
+Regenerate your bot token in @BotFather if it was ever pasted in a public place.
