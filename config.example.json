@@ -1,0 +1,7 @@
+{
+  "telegramBotToken": "PASTE_TOKEN_FROM_BOTFATHER",
+  "allowedUserIds": "PASTE_YOUR_TELEGRAM_USER_ID",
+  "httpPort": 3000,
+  "siteDir": "",
+  "persistDir": ""
+}

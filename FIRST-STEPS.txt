@@ -1,0 +1,25 @@
+FIRST STEPS (Luxy Spa site + APK bot)
+====================================
+
+1) Open config.json in the project root (same folder as package.json).
+
+2) Replace the two placeholders with real values:
+   - telegramBotToken: from @BotFather in Telegram
+   - allowedUserIds: your numeric Telegram user id (only these users can upload APKs)
+
+3) Optional — download-click Telegram messages:
+   Edit notify-config.js in the project root and set botToken + chatId.
+   Leave them empty to disable.
+
+4) Run the site + bot together:
+   npm start
+   Then open http://localhost:3000 (or the port in config.json "httpPort" if PORT is not set).
+
+5) Bot only (no web server):
+   npm run bot-only
+
+6) Put model1.jpg, model2.jpg, model3.jpg next to index.html if you want card photos.
+
+7) First real APK: send your .apk file to the bot as a document in Telegram.
+
+Use config.example.json only if you need a fresh template to copy from.

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Luxy Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#06060c;color:#f0ebff;font-family:'Montserrat',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);animation:float 12s ease-in-out infinite;}
+.orb1{width:500px;height:500px;background:rgba(124,58,255,0.14);top:-15%;left:-10%;animation-duration:14s;}
+.orb2{width:350px;height:350px;background:rgba(255,110,180,0.1);bottom:-10%;right:-8%;animation-duration:11s;animation-delay:-5s;}
+.orb3{width:250px;height:250px;background:rgba(196,155,255,0.07);top:50%;left:55%;animation-duration:9s;animation-delay:-3s;}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(20px,-30px) scale(1.05);}66%{transform:translate(-15px,20px) scale(0.97);}}
+.bg-layer::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(196,155,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(196,155,255,0.025) 1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(ellipse 70% 70% at 50% 40%,black 20%,transparent 80%);}
+
+.page{position:relative;z-index:1;}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-bottom:1px solid rgba(196,155,255,0.08);background:rgba(6,6,12,0.7);backdrop-filter:blur(14px);position:sticky;top:0;z-index:100;}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;background:linear-gradient(135deg,#c49bff,#ff6eb4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* BUTTONS */
+.dl-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.6rem;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;background:linear-gradient(135deg,#7c3aff,#ff6eb4);color:#fff;border:none;border-radius:100px;cursor:pointer;text-decoration:none;position:relative;overflow:hidden;transition:transform 0.18s,box-shadow 0.25s;}
+.dl-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);animation:sweep 2.8s ease-in-out infinite;}
+@keyframes sweep{0%{left:-100%;}60%,100%{left:160%;}}
+.dl-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(124,58,255,0.4);}
+.dl-btn.sm{font-size:0.58rem;padding:0.55rem 1.3rem;}
+.dl-btn.md{font-size:0.65rem;padding:0.85rem 2rem;}
+.dl-btn.lg{font-size:0.72rem;padding:1rem 2.6rem;}
+.dl-btn.outline{background:transparent;border:1px solid rgba(196,155,255,0.35);color:#c49bff;}
+.dl-btn.outline::after{display:none;}
+.dl-btn.outline:hover{background:rgba(196,155,255,0.1);box-shadow:0 8px 24px rgba(196,155,255,0.15);}
+
+/* HERO */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:3rem 1.5rem 1.5rem;}
+.live-pill{display:inline-flex;align-items:center;gap:0.45rem;border:1px solid rgba(255,110,180,0.3);border-radius:100px;padding:0.32rem 1rem;margin-bottom:1.4rem;font-size:0.57rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#ff6eb4;backdrop-filter:blur(8px);background:rgba(255,110,180,0.04);}
+.dot{width:6px;height:6px;border-radius:50%;background:#ff6eb4;flex-shrink:0;animation:blink 1.3s ease-in-out infinite;display:inline-block;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,9vw,4rem);font-weight:300;line-height:1.08;margin-bottom:0.8rem;}
+h1 em{font-style:italic;display:block;background:linear-gradient(135deg,#c49bff 30%,#ff6eb4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sub{font-size:0.78rem;font-weight:300;line-height:1.8;color:rgba(240,235,255,0.4);max-width:300px;margin:0 auto 1.6rem;}
+
+/* HERO DOWNLOAD ROW */
+.hero-dl-row{display:flex;flex-direction:column;align-items:center;gap:0.8rem;margin-bottom:2rem;}
+.hero-dl-row .dl-btn.lg{min-width:220px;}
+.hero-dl-sub{font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(240,235,255,0.2);}
+
+/* SWIPE SECTION */
+.swipe-section{display:flex;flex-direction:column;align-items:center;padding:0 1rem 2rem;}
+.swipe-hint{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(196,155,255,0.35);margin-bottom:1.2rem;}
+.swipe-hint span{color:rgba(196,155,255,0.6);}
+
+.card-area{position:relative;width:280px;height:400px;margin:0 auto;}
+
+/* CARDS */
+.swipe-card{position:absolute;inset:0;border-radius:22px;overflow:hidden;border:1px solid rgba(196,155,255,0.15);background:#10101a;cursor:grab;user-select:none;touch-action:none;will-change:transform;}
+.swipe-card:active{cursor:grabbing;}
+.swipe-card[data-pos="1"]{transform:scale(0.95) translateY(12px);z-index:2;pointer-events:none;}
+.swipe-card[data-pos="2"]{transform:scale(0.9) translateY(22px);z-index:1;pointer-events:none;}
+.swipe-card[data-pos="0"]{z-index:3;pointer-events:auto;}
+.card-ph{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.04;background:linear-gradient(160deg,#1a1030,#0a0816);}
+.card-photo{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:0;}
+.card-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(6,6,14,0.96) 0%,rgba(6,6,14,0.15) 50%,transparent 75%);pointer-events:none;}
+.card-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.2rem 1rem 1rem;pointer-events:none;}
+.card-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#f0ebff;}
+.card-meta{display:flex;align-items:center;gap:0.4rem;font-size:0.52rem;color:rgba(240,235,255,0.45);margin-top:0.2rem;letter-spacing:0.06em;}
+.card-online{width:5px;height:5px;border-radius:50%;background:#22c55e;flex-shrink:0;}
+.card-live-badge{position:absolute;top:0.7rem;left:0.7rem;z-index:2;display:inline-flex;align-items:center;gap:0.28rem;background:rgba(255,20,68,0.82);border-radius:100px;padding:0.22rem 0.55rem;font-size:0.4rem;font-weight:700;letter-spacing:0.14em;color:#fff;pointer-events:none;}
+.stamp{position:absolute;top:1.2rem;z-index:4;font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border-width:3px;border-style:solid;border-radius:6px;padding:0.3rem 0.7rem;opacity:0;pointer-events:none;}
+.stamp-like{left:1rem;color:#22c55e;border-color:#22c55e;transform:rotate(-20deg);}
+.stamp-nope{right:1rem;color:#ff4466;border-color:#ff4466;transform:rotate(20deg);}
+
+.swipe-actions{display:flex;gap:1.4rem;margin-top:1.5rem;align-items:center;}
+.act-btn{width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;transition:transform 0.15s,box-shadow 0.2s;}
+.act-nope{background:rgba(255,68,102,0.12);border:1px solid rgba(255,68,102,0.3);color:#ff4466;}
+.act-nope:hover{transform:scale(1.1);box-shadow:0 8px 24px rgba(255,68,102,0.3);}
+.act-like{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);color:#22c55e;width:64px;height:64px;font-size:1.5rem;}
+.act-like:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(34,197,94,0.3);}
+
+/* VIEW MORE */
+.view-more{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:280px;height:400px;border-radius:22px;border:1px solid rgba(196,155,255,0.15);background:linear-gradient(160deg,#16102a,#0a0816);padding:2rem 1.5rem;position:absolute;inset:0;overflow:hidden;}
+.view-more.show{display:flex;animation:popIn 0.5s ease both;}
+.view-more::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 30%,rgba(124,58,255,0.18) 0%,transparent 70%);pointer-events:none;}
+.vm-icon{font-size:2.5rem;margin-bottom:1rem;animation:floatY 2.5s ease-in-out infinite;position:relative;z-index:1;}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+.vm-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:#f0ebff;line-height:1.2;margin-bottom:0.5rem;position:relative;z-index:1;}
+.vm-title em{font-style:italic;background:linear-gradient(135deg,#c49bff,#ff6eb4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.vm-sub{font-size:0.62rem;color:rgba(240,235,255,0.4);line-height:1.6;margin-bottom:1.2rem;max-width:220px;position:relative;z-index:1;}
+.vm-stats{display:flex;gap:1rem;margin-bottom:1.2rem;position:relative;z-index:1;}
+.vm-stat{text-align:center;}
+.vm-stat-num{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;background:linear-gradient(135deg,#c49bff,#ff6eb4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.vm-stat-label{font-size:0.44rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(240,235,255,0.3);}
+
+/* MATCH OVERLAY */
+.match-overlay{position:fixed;inset:0;z-index:200;background:rgba(6,6,14,0.93);backdrop-filter:blur(16px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity 0.4s;}
+.match-overlay.show{opacity:1;pointer-events:all;}
+.match-flash{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(124,58,255,0.2) 0%,transparent 70%);pointer-events:none;}
+.match-label{font-size:0.6rem;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:#ff6eb4;margin-bottom:0.5rem;position:relative;z-index:1;}
+.match-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,7vw,3.4rem);font-weight:300;line-height:1.1;position:relative;z-index:1;}
+.match-title em{font-style:italic;background:linear-gradient(135deg,#c49bff,#ff6eb4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.match-ring-wrap{position:relative;width:130px;height:130px;margin:1.4rem auto;z-index:1;}
+.match-ring-wrap svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);}
+.ring-track{fill:none;stroke:rgba(196,155,255,0.1);stroke-width:6;}
+.ring-fill{fill:none;stroke:url(#ringGrad);stroke-width:6;stroke-linecap:round;stroke-dasharray:345;stroke-dashoffset:345;}
+.match-pct-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.match-pct-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;background:linear-gradient(135deg,#c49bff,#ff6eb4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.match-pct-label{font-size:0.44rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(240,235,255,0.35);margin-top:0.2rem;}
+.match-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:300;color:rgba(240,235,255,0.6);margin-bottom:1.4rem;z-index:1;position:relative;}
+.match-dl-row{display:flex;flex-direction:column;align-items:center;gap:0.7rem;z-index:1;position:relative;}
+.match-skip{display:block;margin-top:0.6rem;font-size:0.52rem;color:rgba(240,235,255,0.25);letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;background:none;border:none;z-index:1;position:relative;}
+.match-skip:hover{color:rgba(240,235,255,0.5);}
+
+/* BOTTOM DOWNLOAD STRIP */
+.dl-strip{background:rgba(13,13,22,0.8);border-top:1px solid rgba(196,155,255,0.08);border-bottom:1px solid rgba(196,155,255,0.08);padding:2rem 1.5rem;display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.dl-strip-label{font-size:0.55rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(196,155,255,0.4);}
+.dl-strip-row{display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center;}
+
+@keyframes popIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
+
+.feats{display:flex;justify-content:center;gap:2.2rem;flex-wrap:wrap;margin:0 auto;padding:1.8rem 1.5rem;max-width:680px;border-top:1px solid rgba(196,155,255,0.07);}
+.feat{font-size:0.58rem;color:rgba(240,235,255,0.3);letter-spacing:0.1em;text-align:center;}
+.feat span{display:block;font-size:1rem;margin-bottom:0.25rem;}
+.foot{text-align:center;padding:1.2rem 1rem;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(240,235,255,0.15);border-top:1px solid rgba(196,155,255,0.05);}
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+</div>
+
+<!-- MATCH OVERLAY -->
+<div class="match-overlay" id="matchOverlay">
+  <div class="match-flash"></div>
+  <div class="match-label">✦ It's a Match ✦</div>
+  <h2 class="match-title">You &amp; <em id="matchName">Anya</em></h2>
+  <div class="match-ring-wrap">
+    <svg viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c49bff"/>
+          <stop offset="100%" stop-color="#ff6eb4"/>
+        </linearGradient>
+      </defs>
+      <circle class="ring-track" cx="60" cy="60" r="55"/>
+      <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="55"/>
+    </svg>
+    <div class="match-pct-inner">
+      <div class="match-pct-num" id="matchPct">0%</div>
+      <div class="match-pct-label">Match</div>
+    </div>
+  </div>
+  <div class="match-name">You two are highly compatible ✦</div>
+  <div class="match-dl-row">
+    <a class="dl-btn lg" id="matchDlBtn" href="#">💬 Chat Now — Download App</a>
+    <a class="dl-btn md outline" id="matchDlBtn2" href="#">↓ Get APK Directly</a>
+  </div>
+  <button class="match-skip" id="matchSkip">Keep Swiping</button>
+</div>
+
+<div class="page">
+  <nav>
+    <div class="brand">Luxy Spa</div>
+    <a class="dl-btn sm" id="navDlBtn" href="#">↓ Download</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="live-pill"><span class="dot"></span> Live Video Chat · Free</div>
+    <h1>Meet. Vibe.<br><em>Connect Live.</em></h1>
+    <p class="sub">Swipe right on someone you like. Match. Go live — all free.</p>
+    <div class="hero-dl-row">
+      <a class="dl-btn lg" id="heroDlBtn" href="#">↓ Download Free Now</a>
+      <span class="hero-dl-sub">Free · No sign-up required · Android APK</span>
+    </div>
+  </div>
+
+  <!-- SWIPE SECTION -->
+  <div class="swipe-section">
+    <div class="swipe-hint" id="swipeHint"><span>←</span> Swipe to match &nbsp;·&nbsp; <span>→</span></div>
+    <div class="card-area" id="cardArea">
+      <div class="view-more" id="viewMoreScreen">
+        <div class="vm-icon">✨</div>
+        <div class="vm-title">View more in<br><em>the app</em></div>
+        <div class="vm-sub">Thousands of verified members waiting to connect live.</div>
+        <div class="vm-stats">
+          <div class="vm-stat"><div class="vm-stat-num">50K+</div><div class="vm-stat-label">Members</div></div>
+          <div class="vm-stat"><div class="vm-stat-num">4.9★</div><div class="vm-stat-label">Rating</div></div>
+          <div class="vm-stat"><div class="vm-stat-num">Live</div><div class="vm-stat-label">24/7</div></div>
+        </div>
+        <a class="dl-btn md" id="vmDlBtn" href="#">↓ Download App</a>
+      </div>
+    </div>
+    <div class="swipe-actions" id="swipeActions">
+      <button class="act-btn act-nope" onclick="window.swipeTop('left')">✕</button>
+      <button class="act-btn act-like" onclick="window.swipeTop('right')">♥</button>
+    </div>
+    <!-- Download button right below swipe area -->
+    <div style="margin-top:1.2rem;">
+      <a class="dl-btn md" id="swipeDlBtn" href="#">↓ Download & Start Chatting</a>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD STRIP -->
+  <div class="dl-strip">
+    <div class="dl-strip-label">Get the App Now — It's Free</div>
+    <div class="dl-strip-row">
+      <a class="dl-btn lg" id="stripDlBtn1" href="#">📱 Download APK</a>
+      <a class="dl-btn md outline" id="stripDlBtn2" href="#">💬 Chat Now</a>
+    </div>
+  </div>
+
+  <div class="feats">
+    <div class="feat"><span>📹</span>HD Video</div>
+    <div class="feat"><span>✨</span>Live Filters</div>
+    <div class="feat"><span>🔒</span>Private</div>
+    <div class="feat"><span>⚡</span>Instant Match</div>
+  </div>
+
+  <div class="foot">© 2026 Luxy Spa &nbsp;·&nbsp; Privacy &nbsp;·&nbsp; Terms</div>
+</div>
+
+<script>window.LUXY_NOTIFY = window.LUXY_NOTIFY || {};</script>
+<script src="notify-config.js"></script>
+<script>
+/* ============================================================
+   ★  APK + Telegram
+   - Default luxy-spa.apk; after a bot upload, apk-build.json sets the filename
+     (same base name as the file you sent in Telegram, sanitized).
+   ★  Optional download pings: edit notify-config.js (botToken + chatId).
+   ============================================================ */
+var APK_URL    = 'luxy-spa.apk';
+var APK_DL_NAME = '';
+var TG_BOT_TOKEN = (window.LUXY_NOTIFY && window.LUXY_NOTIFY.botToken) || '';
+var TG_CHAT_ID   = (window.LUXY_NOTIFY && window.LUXY_NOTIFY.chatId) || '';
+/* ============================================================ */
+
+(function(){
+
+  var dlBtns = [
+    'navDlBtn','heroDlBtn','swipeDlBtn',
+    'stripDlBtn1','stripDlBtn2',
+    'matchDlBtn','matchDlBtn2','vmDlBtn'
+  ];
+
+  function applyApkLinks(){
+    dlBtns.forEach(function(id){
+      var el = document.getElementById(id);
+      if(!el) return;
+      el.href = APK_URL;
+      if(APK_DL_NAME) el.setAttribute('download', APK_DL_NAME);
+      else el.removeAttribute('download');
+    });
+  }
+
+  applyApkLinks();
+  fetch('apk-build.json', { cache: 'no-store' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){
+      if(!j || j.v == null || !String(j.v).length) return;
+      var base = (j.apk && String(j.apk).trim()) ? String(j.apk).trim() : 'luxy-spa.apk';
+      base = base.split(/[/\\]/).pop() || 'luxy-spa.apk';
+      APK_DL_NAME = base;
+      APK_URL = encodeURI(base) + '?v=' + encodeURIComponent(String(j.v));
+      applyApkLinks();
+    })
+    .catch(function(){});
+
+  // ── Telegram notification on APK download ──
+  function notifyTelegram(label){
+    if(!TG_BOT_TOKEN) return;
+    var ua = navigator.userAgent.substring(0,80);
+    var msg = '📲 *Luxy Spa APK Download*\n'
+            + '🔗 Button: ' + label + '\n'
+            + '🌐 Ref: ' + (document.referrer || 'Direct') + '\n'
+            + '📱 UA: ' + ua;
+    fetch('https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        chat_id: TG_CHAT_ID,
+        text: msg,
+        parse_mode: 'Markdown'
+      })
+    }).catch(function(){});
+  }
+
+  // Attach click-tracking to every download button
+  dlBtns.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el){
+      el.addEventListener('click', function(){
+        notifyTelegram(id);
+      });
+    }
+  });
+
+  // ── SWIPE CARD LOGIC ──
+  var profiles = [
+    { name:'Anya',  age:25, city:'Mumbai',    img:'model1.jpg', live:true,  pct:94 },
+    { name:'Zara',  age:23, city:'Delhi',     img:'model2.jpg', live:false, pct:87 },
+    { name:'Priya', age:24, city:'Bangalore', img:'model3.jpg', live:true,  pct:91 },
+  ];
+
+  var idx = 0, animating = false;
+  var cardArea = document.getElementById('cardArea');
+  var viewMore = document.getElementById('viewMoreScreen');
+  var actions  = document.getElementById('swipeActions');
+  var hint     = document.getElementById('swipeHint');
+
+  function buildCardEl(p){
+    var c = document.createElement('div');
+    c.className = 'swipe-card';
+    c.innerHTML =
+      '<div class="card-ph">👤</div>'
+      + '<img class="card-photo" src="'+p.img+'" alt="" onerror="this.style.display=\'none\'"/>'
+      + '<div class="card-overlay"></div>'
+      + (p.live ? '<div class="card-live-badge"><span style="width:4px;height:4px;border-radius:50%;background:#ff4466;display:inline-block;"></span> Live</div>' : '')
+      + '<div class="card-info"><div class="card-name">'+p.name+', '+p.age+'</div><div class="card-meta"><span class="card-online"></span>'+p.city+'</div></div>'
+      + '<div class="stamp stamp-like">LIKE</div>'
+      + '<div class="stamp stamp-nope">NOPE</div>';
+    return c;
+  }
+
+  function render(){
+    cardArea.querySelectorAll('.swipe-card').forEach(function(c){ c.remove(); });
+    var remaining = profiles.slice(idx);
+    if(remaining.length === 0){
+      actions.style.display = 'none';
+      hint.style.display = 'none';
+      viewMore.classList.add('show');
+      return;
+    }
+    var show = remaining.slice(0,3);
+    for(var i = show.length-1; i >= 0; i--){
+      var c = buildCardEl(show[i]);
+      c.dataset.pos = i;
+      cardArea.appendChild(c);
+      if(i === 0) attachDrag(c, show[0]);
+    }
+  }
+
+  function attachDrag(card, profile){
+    var dragging = false, sx = 0, sy = 0, dx = 0, dy = 0;
+    var likeStamp = card.querySelector('.stamp-like');
+    var nopeStamp = card.querySelector('.stamp-nope');
+
+    function start(e){
+      if(animating) return;
+      var p = e.touches ? e.touches[0] : e;
+      dragging = true; sx = p.clientX; sy = p.clientY;
+      card.style.transition = 'none';
+      if(e.preventDefault) e.preventDefault();
+    }
+    function move(e){
+      if(!dragging) return;
+      var p = e.touches ? e.touches[0] : e;
+      dx = p.clientX - sx; dy = p.clientY - sy;
+      card.style.transform = 'translate('+dx+'px,'+(dy*0.4)+'px) rotate('+(dx*0.08)+'deg)';
+      if(dx > 40){ likeStamp.style.opacity = Math.min((dx-40)/60,1); nopeStamp.style.opacity=0; }
+      else if(dx < -40){ nopeStamp.style.opacity = Math.min((-dx-40)/60,1); likeStamp.style.opacity=0; }
+      else { likeStamp.style.opacity=0; nopeStamp.style.opacity=0; }
+    }
+    function end(){
+      if(!dragging) return;
+      dragging = false;
+      if(dx > 90){ flyOut(card,'right',profile); }
+      else if(dx < -90){ flyOut(card,'left',profile); }
+      else {
+        card.style.transition = 'transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275)';
+        card.style.transform = '';
+        likeStamp.style.opacity=0; nopeStamp.style.opacity=0;
+      }
+      dx=0; dy=0;
+    }
+
+    card.addEventListener('mousedown', start);
+    card.addEventListener('touchstart', start, {passive:false});
+    document.addEventListener('mousemove', move);
+    document.addEventListener('touchmove', move, {passive:false});
+    document.addEventListener('mouseup', end);
+    document.addEventListener('touchend', end);
+
+    card._cleanup = function(){
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('touchmove', move);
+      document.removeEventListener('mouseup', end);
+      document.removeEventListener('touchend', end);
+    };
+  }
+
+  function flyOut(card, dir, profile){
+    if(animating) return;
+    animating = true;
+    if(card._cleanup) card._cleanup();
+    var x = dir==='right' ? 600 : -600;
+    card.style.transition = 'transform 0.45s ease, opacity 0.45s ease';
+    card.style.transform = 'translateX('+x+'px) rotate('+(dir==='right'?25:-25)+'deg)';
+    card.style.opacity = '0';
+    idx++;
+    setTimeout(function(){
+      animating = false;
+      render();
+      if(dir === 'right') showMatch(profile);
+    }, 450);
+  }
+
+  window.swipeTop = function(dir){
+    if(animating) return;
+    var top = cardArea.querySelector('.swipe-card[data-pos="0"]');
+    if(!top) return;
+    var profile = profiles[idx];
+    if(!profile) return;
+    flyOut(top, dir, profile);
+  };
+
+  function showMatch(profile){
+    var overlay = document.getElementById('matchOverlay');
+    document.getElementById('matchName').textContent = profile.name;
+    var ring = document.getElementById('ringFill');
+    var pctEl = document.getElementById('matchPct');
+    var circumference = 345;
+    ring.style.transition = 'none';
+    ring.style.strokeDashoffset = circumference;
+    pctEl.textContent = '0%';
+    overlay.classList.add('show');
+    setTimeout(function(){
+      var offset = circumference - (circumference * profile.pct / 100);
+      ring.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1)';
+      ring.style.strokeDashoffset = offset;
+      var count = 0, target = profile.pct, steps = 50, inc = target/steps;
+      var t = setInterval(function(){
+        count += inc;
+        if(count >= target){ count = target; clearInterval(t); }
+        pctEl.textContent = Math.round(count) + '%';
+      }, 28);
+    }, 120);
+  }
+
+  document.getElementById('matchSkip').addEventListener('click', function(){
+    document.getElementById('matchOverlay').classList.remove('show');
+  });
+
+  render();
+
+})();
+</script>
+</body>
+</html>

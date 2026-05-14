@@ -1,0 +1,14 @@
+{
+  "name": "luxy-spa-railway",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node railway.mjs",
+    "bot-only": "node apk-update-bot/index.mjs"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "telegraf": "^4.16.3"
+  }
+}

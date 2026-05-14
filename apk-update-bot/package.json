@@ -1,0 +1,12 @@
+{
+  "name": "luxy-spa-apk-update-bot",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3"
+  }
+}

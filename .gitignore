@@ -1,0 +1,7 @@
+node_modules/
+.env
+apk-update-bot/node_modules/
+apk-update-bot/.env
+config.json
+notify-config.js
+*.apk

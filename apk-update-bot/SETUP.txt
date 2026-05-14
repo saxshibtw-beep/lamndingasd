@@ -1,0 +1,62 @@
+Luxy Spa — APK update Telegram bot
+=================================
+
+What it does
+------------
+When you send a new .apk file to the bot (as a document), it overwrites:
+  luxy-spa.apk
+  apk-build.json   (contains a version id so the site adds ?v=... to download links)
+
+The site (index.html) reads apk-build.json so visitors do not keep an old cached APK.
+
+Requirements
+--------------
+- Node.js 18+
+- This bot must run on a computer or VPS that can WRITE to the same folder your
+  web server uses for index.html (static hosts like GitHub Pages cannot run this
+  unless you add a separate storage API).
+
+Setup (no .env — use project root config.json)
+----------------------------------------------
+1. Edit config.json next to package.json (see config.example.json for a blank template).
+2. Set telegramBotToken (from @BotFather) and allowedUserIds (your numeric Telegram id;
+   comma-separated for several users). Optional: get id from @userinfobot.
+3. Optional keys in config.json:
+   siteDir    — folder with index.html (default: project root)
+   persistDir — e.g. /data when using a Railway volume (absolute path recommended)
+   httpPort   — local dev port when PORT is not set (default 3000)
+
+Run from project root:  npm start
+
+Usage
+-------
+/start   — short help
+/status  — show current APK size and version id
+Send any .apk as a file attachment — replaces luxy-spa.apk
+
+Telegram file size limit: bots using the official cloud API can only **download** files up to about **20 MB** (getFile). Larger APKs need a smaller build, splits, or a self-hosted Bot API server with `--local`.
+
+
+Hosting on Railway
+------------------
+Yes. Deploy this repo root on Railway (Nixpacks runs `npm start` → `node railway.mjs`).
+
+Put the same settings in config.json in the repo (use a private repo if it contains secrets).
+
+That process does two things:
+  1) Serves your landing page + APK on the public URL Railway gives you (uses PORT when set).
+  2) Runs the Telegram bot that writes luxy-spa.apk and apk-build.json into the active site folder.
+
+Optional so APKs survive redeploys:
+  Add a Railway Volume mounted e.g. at /data
+  In config.json set:  "persistDir": "/data"
+  On first boot, index.html, notify-config.js, and model1–3.jpg are copied from the
+  deploy image into the volume if missing; new APK uploads go to the same folder.
+
+Without a volume, each redeploy wipes luxy-spa.apk until you upload again via the bot.
+
+Your public site URL will look like: https://YOUR-SERVICE.up.railway.app/
+Open that URL after deploy; use the same URL in marketing.
+
+Local “bot only” (no HTTP): from repo root run  npm run bot-only
+  (uses config.json in the project root.)
